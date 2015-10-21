@@ -43,3 +43,7 @@ Also see examples directory or try running the tests with mocha
 * Transpile for older node?
 * Browserify?
 * More tests would be nice!
+
+### License
+
+MIT
