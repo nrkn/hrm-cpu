@@ -1,11 +1,12 @@
 const compile = require( './compile' )
 
-module.exports = ( source, inbox, floor ) => {
+module.exports = ( source, inbox, floor, verbose ) => {
   const outbox = []
   const memory = []
   
   var accumulator = null
   var counter = 0
+  var steps = 0
   
   Object.keys( floor || {} ).forEach( key =>
     memory[ key ] = floor[ key ]
@@ -14,7 +15,9 @@ module.exports = ( source, inbox, floor ) => {
   const cpu = {
     INBOX: () => {
       if( inbox.length === 0 ){
-        counter = Infinity
+        counter = Infinity        
+        steps--
+        
         return
       }
       
@@ -76,10 +79,22 @@ module.exports = ( source, inbox, floor ) => {
     
     const instr = program[ i ]
     
-    cpu[ instr[ 0 ] ]( instr[ 1 ] )  
+    cpu[ instr[ 0 ] ]( instr[ 1 ] )
+    
+    steps++
     
     return execute( program, counter )
   }
   
-  return execute( compile( source ), 0 )    
+  const program = compile( source )
+  
+  const result = execute( program, 0 )    
+  
+  return verbose ? {
+    accumulator,
+    memory,
+    outbox: result,
+    size: program.length,
+    steps
+  } : result
 }

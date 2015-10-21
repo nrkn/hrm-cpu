@@ -36,6 +36,18 @@ console.log( outbox )
 ```
 
 Also see examples directory or try running the tests with mocha
+
+If you have no initial floor state (like the early levels) you can omit floor:
+
+```javascript
+const outbox = hrm( source, inbox )
+```
+
+You can also get verbose output (for checking your size and steps):
+
+```javascript
+const info = hrm( source, inbox, floor, true )
+```
  
 ### TODO
 
