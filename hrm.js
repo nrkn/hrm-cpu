@@ -7,7 +7,7 @@ module.exports = ( source, inbox, floor ) => {
   var accumulator = null
   var counter = 0
   
-  Object.keys( floor ).forEach( key =>
+  Object.keys( floor || {} ).forEach( key =>
     memory[ key ] = floor[ key ]
   )
   
