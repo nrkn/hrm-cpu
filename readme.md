@@ -40,4 +40,4 @@ Also see examples directory
 * Haven't got to the levels involving strings yet so not sure how they look  
 * Transpile for older node?
 * Browserify?
-* Some tests would be nice!
+* More tests would be nice!
