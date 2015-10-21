@@ -48,12 +48,14 @@ module.exports = ( source, inbox, floor ) => {
     },
     
     BUMPUP: i => {
-      accumulator = memory[ i ]++
+      memory[ i ]++
+      accumulator = memory[ i ] 
       counter++
     },
     
     BUMPDN: i => {
-      accumulator = memory[ i ]--
+      memory[ i ]--
+      accumulator = memory[ i ] 
       counter++
     },
     
