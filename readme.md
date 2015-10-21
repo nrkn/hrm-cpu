@@ -1,6 +1,8 @@
 # hrm-cpu
 ## Run Human Resources Machine programs in JavaScript
 
+This is a JavaScript runtime for the programs you write in the game [Human Resource Machine](http://tomorrowcorporation.com/humanresourcemachine)
+
 ![Screenshot](http://tomorrowcorporation.com/blog/wp-content/themes/tcTheme2/images/hrm/screenshots/hrm_04.png)
 
 > Human Resource Machine is a puzzle game. In each level, your boss gives you a job. Automate it by programming your little office worker! If you succeed, you'll be promoted up to the next level for another year of work in the vast office building. Congratulations!
