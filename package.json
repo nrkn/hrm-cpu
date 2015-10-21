@@ -1,6 +1,6 @@
 {
   "name": "hrm-cpu",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Run Human Resources Machine programs",
   "main": "hrm.js",
   "directories": {
@@ -15,7 +15,7 @@
   },
   "keywords": [
     "human",
-    "resources",
+    "resource",
     "machine",
     "cpu",
     "assembler"

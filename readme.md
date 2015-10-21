@@ -11,6 +11,8 @@
 
 ### Usage
 
+Requires node 4.x - uses ES6
+
 ```javascript
 const hrm = require( 'hrm' )
 
