@@ -1,0 +1,10 @@
+-- HUMAN RESOURCE MACHINE PROGRAM --
+
+a:
+    INBOX   
+    COPYTO   12
+    COPYFROM [12]
+    OUTBOX  
+    JUMP     a
+
+

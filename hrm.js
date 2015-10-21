@@ -79,7 +79,17 @@ module.exports = ( source, inbox, floor, verbose ) => {
     
     const instr = program[ i ]
     
-    cpu[ instr[ 0 ] ]( instr[ 1 ] )
+    if( instr.length > 1 ){
+      var arg = instr[ 1 ]  
+      
+      if( ( String( arg ) ).startsWith( '[' ) ){
+        arg = memory[ parseInt( arg.substr( 1 ) ) ]
+      }
+      
+      cpu[ instr[ 0 ] ]( arg )
+    } else {
+      cpu[ instr[ 0 ] ]()
+    }
     
     steps++
     

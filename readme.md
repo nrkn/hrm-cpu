@@ -48,13 +48,6 @@ You can also get verbose output (for checking your size and steps):
 ```javascript
 const info = hrm( source, inbox, floor, true )
 ```
- 
-### TODO
-
-* Haven't got to the levels involving strings yet so not sure how they look  
-* Transpile for older node?
-* Browserify?
-* More tests would be nice!
 
 ### License
 

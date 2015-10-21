@@ -47,7 +47,8 @@ const compile = source => {
     if( word.startsWith( 'JUMP' ) ){        
       words[ 1 ] = labels[ words[ 1 ] ]
     } else if( words.length > 1 ){
-      words[ 1 ] = Number( words[ 1 ] )
+      words[ 1 ] = 
+        words[ 1 ].startsWith( '[' ) ? words[ 1 ] : Number( words[ 1 ] )
     }
     
     return words
