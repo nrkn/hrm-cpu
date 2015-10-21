@@ -1,0 +1,29 @@
+{
+  "name": "hrm-cpu",
+  "version": "0.0.1",
+  "description": "Run Human Resources Machine programs",
+  "main": "hrm.js",
+  "directories": {
+    "example": "examples"
+  },
+  "engines": {
+    "node": ">=4.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nrkn/hrm-cpu.git"
+  },
+  "keywords": [
+    "human",
+    "resources",
+    "machine",
+    "cpu",
+    "assembler"
+  ],
+  "author": "Nik Coughlin <nrkn.com@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nrkn/hrm-cpu/issues"
+  },
+  "homepage": "https://github.com/nrkn/hrm-cpu#readme"
+}
