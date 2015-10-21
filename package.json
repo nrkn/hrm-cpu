@@ -1,6 +1,6 @@
 {
   "name": "hrm-cpu",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Run Human Resources Machine programs",
   "main": "hrm.js",
   "directories": {
@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/nrkn/hrm-cpu/issues"
   },
-  "homepage": "https://github.com/nrkn/hrm-cpu#readme"
+  "homepage": "https://github.com/nrkn/hrm-cpu#readme",
+  "devDependencies": {
+    "mocha": "^2.3.3"
+  }
 }

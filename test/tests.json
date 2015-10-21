@@ -1,0 +1,12 @@
+{
+  "Mail-Room": {
+    "inbox": [ 1, 9, 4 ],
+    "floor": {},
+    "outbox": [ 1, 9, 4 ]
+  },
+  "Busy-Mail-Room": {
+    "inbox": [ "B", "O", "O", "T", "S", "E", "Q" ],
+    "floor": {},
+    "outbox": [ "B", "O", "O", "T", "S", "E", "Q" ]
+  }
+}
