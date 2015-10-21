@@ -16,7 +16,7 @@ This is a JavaScript runtime for the programs you write in the game [Human Resou
 Requires node 4.x - uses ES6
 
 ```javascript
-const hrm = require( 'hrm' )
+const hrm = require( 'hrm-cpu' )
 
 //source is a string in the Human Resources Machine program format
 const source = loadSomeSourceFile()

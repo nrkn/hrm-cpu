@@ -1,6 +1,6 @@
 {
   "name": "hrm-cpu",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Run Human Resources Machine programs in JavaScript",
   "main": "hrm.js",
   "directories": {
