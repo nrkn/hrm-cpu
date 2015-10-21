@@ -1,5 +1,5 @@
 # hrm-cpu
-## Run Human Resources Machine programs
+## Run Human Resources Machine programs in JavaScript
 
 ![Screenshot](http://tomorrowcorporation.com/blog/wp-content/themes/tcTheme2/images/hrm/screenshots/hrm_04.png)
 
@@ -33,8 +33,8 @@ console.log( outbox )
 
 ```
 
-Also see examples directory
-
+Also see examples directory or try running the tests with mocha
+ 
 ### TODO
 
 * Haven't got to the levels involving strings yet so not sure how they look  

@@ -8,5 +8,78 @@
     "inbox": [ "B", "O", "O", "T", "S", "E", "Q" ],
     "floor": {},
     "outbox": [ "B", "O", "O", "T", "S", "E", "Q" ]
+  },
+  "Copy-Floor": {
+    "inbox": [ -99, -99, -99, -99 ],
+    "floor": [ "U", "J", "X", "G", "B", "E" ],
+    "outbox": [ "B", "U", "G" ]
+  },
+  "Scrambler-Handler": {
+    "inbox": [ 4, 8, "A", "E", 2, 5 ],
+    "floor": {},
+    "outbox": [ 8, 4, "E", "A", 5, 2 ]
+  },
+  "Rainy-Summer": {
+    "inbox": [ 3, 3, 1, 4, -3, 5, 0, -1 ],
+    "floor": {},
+    "outbox": [ 6, 5, 2, -1 ]
+  },
+  "Zero-Exterminator": {
+    "inbox": [ 8, 0, -4, "A", 0, 0, 9, 0 ],
+    "floor": {},
+    "outbox": [ 8, -4, "A", 9 ]
+  },
+  "Tripler-Room": {
+    "inbox": [ 7, -5, 5, 0 ],
+    "floor": {},
+    "outbox": [ 21, -15, 15, 0 ]    
+  },
+  "Zero-Preservation-Initiative": {
+    "inbox": [ 2, 0, 1, "B", 0, 0, 6, 0 ],
+    "floor": {},
+    "outbox": [ 0, 0, 0, 0 ]        
+  },
+  "Octoplier-Suite": {
+    "inbox": [ 2, -1, 3, 0 ],
+    "floor": {},
+    "outbox": [ 16, -8, 24, 0 ]
+  },
+  "Sub-Hallway": {
+    "inbox": [ 4, 5, 8, 4, -9, -9, 5, -3 ],
+    "floor": {},
+    "outbox": [ 1, -1, -4, 4, 0, 0, -8, 8 ]    
+  },
+  "Tetracontiplier": {
+    "inbox": [ 2, -6, 5, 0 ],
+    "floor": {},
+    "outbox": [ 80, -240, 200, 0 ]
+  },
+  "Equalization-Room": {
+    "inbox": [ 6, 1, 8, 8, 5, 0, -4, -4 ],
+    "floor": {},
+    "outbox": [ 8, -4 ]    
+  },
+  "Maximization-Room": {
+    "inbox": [ 4, 9, -8, -4, 9, 9, -6, -3 ],
+    "floor": {},
+    "outbox": [ 9, -4, 9, -3 ]    
+  },
+  "Absolute-Positivity": {
+    "inbox": [ 2, -6, -5, 0, -3, -7, 9 ],
+    "floor": {},
+    "outbox": [ 2, 6, 5, 0, 3, 7, 9 ]
+  },
+  "Exclusive-Lounge": {
+    "inbox": [ 3, 5, -2, -6, 1, -9, -8, 7 ],
+    "floor": {
+      "4": 0,
+      "5": 1
+    },
+    "outbox": [ 0, 0, 1, 1 ]
+  },
+  "Countdown": {
+    "inbox": [ 8, -5, 0, 3 ],
+    "floor": {},
+    "outbox": [ 8, 7, 6, 5, 4, 3, 2, 1, 0, -5, -4, -3, -2, -1, 0, 0, 3, 2, 1, 0 ]
   }
 }
