@@ -1,5 +1,14 @@
 const compile = require( './compile' )
 
+const asNumber = s =>
+  typeof s === 'string' ? s.charCodeAt( 0 ) : s
+
+const add = ( a, b ) => 
+  asNumber( a ) + asNumber( b )
+
+const sub = ( a, b ) =>
+  asNumber( a ) - asNumber( b )
+
 module.exports = ( source, inbox, floor, verbose ) => {
   const outbox = []
   const memory = []
@@ -11,15 +20,6 @@ module.exports = ( source, inbox, floor, verbose ) => {
   Object.keys( floor || {} ).forEach( key =>
     memory[ key ] = floor[ key ]
   )
-  
-  const asNumber = s =>
-    typeof s === 'string' ? s.charCodeAt( 0 ) : s
-  
-  const add = ( a, b ) => 
-    asNumber( a ) + asNumber( b )
-  
-  const sub = ( a, b ) =>
-    asNumber( a ) - asNumber( b )
   
   const cpu = {
     INBOX: () => {
