@@ -129,5 +129,22 @@
     "inbox": [ 7, 3, 3, 8, 8 ],
     "floor": [ "N", "K", "A", "E", "R", "D", "O", "L", "Y", "J", null, null, 8 ],
     "outbox": [ "L", "E", "E", "Y", "Y" ]
-  }  
+  },
+  "String-Storage-Floor": {
+    "inbox": [ 4, 15, 7, 0, 22, 17, 11, 20, 2, 13, 4, 17, 22 ],
+    "floor": [ "G", "E", "T", 0, "T", "H", 0, "T", "A", "R", 0, "A", "W", "A", "K", "E", 0, "I", "S", 0, "X", "X", "X", 0 ],
+    "outbox": [ "T", "H", "E", "T", "A", "R", "G", "E", "T", "X", "I", "S", "A", "W", "A", "K", "E", "X", "X", "X", "T", "A", "K", "E", "T", "H", "I", "S", "X" ]
+  },
+  "String-Reverse": {
+    "inbox": [ "T", "E", "A", 0, "M", "O", "R", "E", 0, "B", "U", "G", 0 ],
+    "floor": {
+      "14": 0
+    },
+    "outbox": [ "A", "E", "T", "E", "R", "O", "M", "G", "U", "B" ]
+  },
+  "Inventory-Report": {
+    "inbox": [ "X", "A", "C", "B" ],
+    "floor": [ "B", "A", "X", "B", "C", "X", "A", "B", "A", "X", "C", "B", "A", "B", 0 ],
+    "outbox": [ 3, 4, 2, 5 ]
+  }
 }

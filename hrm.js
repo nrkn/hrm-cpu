@@ -12,6 +12,15 @@ module.exports = ( source, inbox, floor, verbose ) => {
     memory[ key ] = floor[ key ]
   )
   
+  const asNumber = s =>
+    typeof s === 'string' ? s.charCodeAt( 0 ) : s
+  
+  const add = ( a, b ) => 
+    asNumber( a ) + asNumber( b )
+  
+  const sub = ( a, b ) =>
+    asNumber( a ) - asNumber( b )
+  
   const cpu = {
     INBOX: () => {
       if( inbox.length === 0 ){
@@ -41,23 +50,23 @@ module.exports = ( source, inbox, floor, verbose ) => {
     },
     
     ADD: i => {
-      accumulator += memory[ i ]
+      accumulator = add( accumulator, memory[ i ] )
       counter++
     },
     
     SUB: i => {
-      accumulator -= memory[ i ]
+      accumulator = sub( accumulator, memory[ i ] )
       counter++
     },
     
     BUMPUP: i => {
-      memory[ i ]++
+      memory[ i ] = add( memory[ i ], 1 )
       accumulator = memory[ i ] 
       counter++
     },
     
     BUMPDN: i => {
-      memory[ i ]--
+      memory[ i ] = sub( memory[ i ], 1 )
       accumulator = memory[ i ] 
       counter++
     },
