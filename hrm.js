@@ -17,9 +17,12 @@ module.exports = ( source, inbox, floor, verbose ) => {
   var counter = 0
   var steps = 0
   
-  Object.keys( floor || {} ).forEach( key =>
-    memory[ key ] = floor[ key ]
-  )
+  if( floor ){
+    const tiles = floor.tiles || floor
+    Object.keys( tiles ).forEach( key =>
+      memory[ key ] = floor.tiles[ key ]
+    )
+  }
   
   const cpu = {
     INBOX: () => {
