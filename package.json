@@ -1,6 +1,6 @@
 {
   "name": "hrm-cpu",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Run Human Resources Machine programs in JavaScript",
   "main": "hrm.js",
   "directories": {
@@ -18,7 +18,8 @@
     "resource",
     "machine",
     "cpu",
-    "assembler"
+    "assembly",
+    "hrm"
   ],
   "author": "Nik Coughlin <nrkn.com@gmail.com>",
   "license": "MIT",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/nrkn/hrm-cpu#readme",
   "devDependencies": {
+    "hrm-level-data": "0.0.6",
     "mocha": "^2.3.3"
   }
 }
