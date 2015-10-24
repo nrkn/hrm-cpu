@@ -49,6 +49,23 @@ You can also get verbose output (for checking your size and steps):
 const info = hrm( source, inbox, floor, true )
 ```
 
+If you want verbose output but have no floor, pass an empty array or object:
+
+```javascript
+const info = hrm( source, inbox, {}, true )
+```
+
+There is also an alternative floor syntax to allow the use of data from 
+[hrm-level-data](https://github.com/atesgoral/hrm-level-data/blob/master/hrm-level-data-schema.json):
+
+```javascript
+const floor = {
+  tiles: {
+    9: 0
+  }
+}
+```
+
 ### License
 
 MIT
