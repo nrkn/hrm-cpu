@@ -66,6 +66,14 @@ const floor = {
 }
 ```
 
+### Related projects
+
+* [hrmsandbox]( https://github.com/sixlettervariables/hrmsandbox ) - has a web interface, command line bin, expression grammar and many other cool features
+* [hrm-level-data]( https://github.com/atesgoral/hrm-level-data ) - metadata for each level in the game, hrm-cpu uses this in its tests
+* [hrm-solutions]( https://github.com/atesgoral/hrm-solutions ) - solutions and size/speed hacks for each level
+
+Please let me know if you know of any others!
+
 ### License
 
 MIT
