@@ -20,7 +20,7 @@ module.exports = ( source, inbox, floor, verbose ) => {
   if( floor ){
     const tiles = floor.tiles || floor
     Object.keys( tiles ).forEach( key =>
-      memory[ key ] = floor.tiles[ key ]
+      memory[ key ] = tiles[ key ]
     )
   }
   
