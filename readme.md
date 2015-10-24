@@ -1,5 +1,5 @@
 # hrm-cpu
-## Run Human Resources Machine programs in JavaScript
+## Run Human Resource Machine programs in JavaScript
 
 This is a JavaScript runtime for the programs you write in the game [Human Resource Machine](http://tomorrowcorporation.com/humanresourcemachine)
 
@@ -18,7 +18,7 @@ Requires node 4.x - uses ES6
 ```javascript
 const hrm = require( 'hrm-cpu' )
 
-//source is a string in the Human Resources Machine program format
+//source is a string in the Human Resource Machine program format
 const source = loadSomeSourceFile()
 
 //the initial state of the inbox - treated as FIFO
