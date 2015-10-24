@@ -34,43 +34,55 @@ module.exports = ( source, inbox, floor, verbose ) => {
       }
       
       accumulator = inbox.shift()
+      
       counter++
     },
     
     OUTBOX: () => {
       outbox.push( accumulator )
+      
+      accumulator = null
+      
       counter++
     },
     
     COPYFROM: i => {
       accumulator = memory[ i ]
+      
       counter++
     },
     
     COPYTO: i => {
       memory[ i ] = accumulator
+      
       counter++
     },
     
     ADD: i => {
       accumulator = add( accumulator, memory[ i ] )
+      
       counter++
     },
     
     SUB: i => {
       accumulator = sub( accumulator, memory[ i ] )
+      
       counter++
     },
     
     BUMPUP: i => {
       memory[ i ] = add( memory[ i ], 1 )
+      
       accumulator = memory[ i ] 
+      
       counter++
     },
     
     BUMPDN: i => {
       memory[ i ] = sub( memory[ i ], 1 )
+      
       accumulator = memory[ i ] 
+      
       counter++
     },
     
