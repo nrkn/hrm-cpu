@@ -49,54 +49,54 @@ module.exports = ( source, inbox, floor, verbose ) => {
       counter++
     },
     
-    COPYFROM: i => {
-      accumulator = memory[ i ]
+    COPYFROM: address => {
+      accumulator = memory[ address ]
       
       counter++
     },
     
-    COPYTO: i => {
-      memory[ i ] = accumulator
+    COPYTO: address => {
+      memory[ address ] = accumulator
       
       counter++
     },
     
-    ADD: i => {
-      accumulator = add( accumulator, memory[ i ] )
+    ADD: address => {
+      accumulator = add( accumulator, memory[ address ] )
       
       counter++
     },
     
-    SUB: i => {
-      accumulator = sub( accumulator, memory[ i ] )
+    SUB: address => {
+      accumulator = sub( accumulator, memory[ address ] )
       
       counter++
     },
     
-    BUMPUP: i => {
-      memory[ i ] = add( memory[ i ], 1 )
+    BUMPUP: address => {
+      memory[ address ] = add( memory[ address ], 1 )
       
-      accumulator = memory[ i ] 
-      
-      counter++
-    },
-    
-    BUMPDN: i => {
-      memory[ i ] = sub( memory[ i ], 1 )
-      
-      accumulator = memory[ i ] 
+      accumulator = memory[ address ] 
       
       counter++
     },
     
-    JUMP: i =>
-      counter = i,
+    BUMPDN: address => {
+      memory[ address ] = sub( memory[ address ], 1 )
       
-    JUMPZ: i =>
-      counter = accumulator === 0 ? i : counter + 1,
+      accumulator = memory[ address ] 
       
-    JUMPN: i =>
-      counter = accumulator < 0 ? i : counter + 1
+      counter++
+    },
+    
+    JUMP: line =>
+      counter = line,
+      
+    JUMPZ: line =>
+      counter = accumulator === 0 ? line : counter + 1,
+      
+    JUMPN: line =>
+      counter = accumulator < 0 ? line : counter + 1
   }
   
   const execute = ( program, i ) => {

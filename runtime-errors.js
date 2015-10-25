@@ -32,21 +32,29 @@ const checks = {
   }
 }
 
-const emptyHands = name =>
-  `Empty value! You can't ${ name } with empty hands!`
-  
-const emptyTile = name =>
-  `Empty value! You can't ${ name } with an empty tile on the floor! Try writing something to that tile first.`
+const EmptyHandsError = instrName => {
+  return {
+    name: 'Empty Hands',
+    message: `Empty value! You can't ${ instrName } with empty hands!`
+  }
+}
+
+const EmptyTileError = instrName => {
+  return {
+    name: 'Empty Tile',
+    message: `Empty value! You can't ${ instrName } with an empty tile on the floor! Try writing something to that tile first.`
+  }
+}
 
 module.exports = ( instr, arg, state ) => {
   const errorChecks = {
     accumulator: name => {
       if( state.accumulator === null )
-        throw Error( emptyHands( name ) )
+        throw EmptyHandsError( name )
     },
-    memory: ( name, i ) => {
-      if( state.memory[ i ] === null )
-        throw Error( emptyTile( name ) )
+    memory: ( name, address ) => {
+      if( state.memory[ address ] === undefined || state.memory[ address ] === null )
+        throw EmptyTileError( name )
     }
   }
 

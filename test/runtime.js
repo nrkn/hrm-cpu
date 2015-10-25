@@ -6,40 +6,40 @@ const floor = {
 }
 
 const fails = {
-  "OUTBOX empty hands": `
+  "OUTBOX: Empty Hands": `
     OUTBOX
   `,
-  "COPYFROM empty floor": `
+  "COPYFROM: Empty Floor": `
     COPYFROM 0
   `,
-  "COPYTO empty hands": `
+  "COPYTO: Empty Hands": `
     COPYTO 0
   `,
-  "ADD empty hands": `
+  "ADD: Empty Hands": `
     ADD 1
   `,
-  "ADD empty floor": `
+  "ADD: Empty Floor": `
     COPYFROM 1
     ADD 0
   `,
-  "SUB empty hands": `
+  "SUB: Empty Hands": `
     SUB 1
   `,
-  "SUB empty floor": `
+  "SUB: Empty Floor": `
     COPYFROM 1
     SUB 0
   `,
-  "BUMPUP empty floor": `
+  "BUMPUP: Empty Floor": `
     BUMPUP 0
   `,
-  "BUMPDN empty floor": `
+  "BUMPDN: Empty Floor": `
     BUMPDN 0
   `,
-  "JUMPZ empty hands": `
+  "JUMPZ: Empty Hands": `
 a:    
     JUMPZ a
   `,
-  "JUMPN empty hands": `
+  "JUMPN: Empty Hands": `
 a:  
     JUMPN a
   `  
@@ -48,10 +48,9 @@ a:
 describe( 'hrm-cpu runtime errors', () =>
   Object.keys( fails ).forEach( key => {
     const source = fails[ key ]
-    it( 'throws on ' + key, done => {
-      assert.throws( () => {
-        hrm( source, floor )
-      })
+
+    it( key, done => {
+      assert.throws( () => hrm( source, [ 1 ], floor ) )
       done()
     })    
   })
