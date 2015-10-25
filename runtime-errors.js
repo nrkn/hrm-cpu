@@ -46,13 +46,50 @@ const EmptyTileError = instrName => {
   }
 }
 
+const OutOfBoundsError = instrName => {
+  return {
+    name: 'No Such Tile',
+    message: `No such tile! You can't ${ instrName } with a tile that isn't on the floor!`
+  }
+}
+
+const InstrNotAllowedError = instrName => {
+  return {
+    name: 'Instruction Not Allowed',
+    message: `Instruction not allowed! You can't use ${ instrName } on this level!`
+  }
+}
+
+const DereferencingNotAllowedError = () => {
+  return {
+    name: 'Dereferencing Not Allowed',
+    message: `Dereferencing not allowed! You can't dereference on this level!`
+  }
+}
+
+const TooManyStepsError = maxSteps => {
+  return {
+    name: 'Too Many Steps',
+    message: `Too many steps! The maximum steps allowed is ${ maxSteps }!`
+  }  
+}
+
 module.exports = ( instr, arg, state ) => {
+  if( state.dereferenced && !state.dereferencing )
+    throw DereferencingNotAllowedError()
+  
+  if( state.steps > state.maxSteps )
+    throw TooManyStepsError( state.maxSteps ) 
+  
   const errorChecks = {
     accumulator: name => {
       if( state.accumulator === null )
         throw EmptyHandsError( name )
     },
     memory: ( name, address ) => {
+      if( address >= state.memorySize )
+        throw OutOfBoundsError( name )
+
       if( state.memory[ address ] === undefined || state.memory[ address ] === null )
         throw EmptyTileError( name )
     }

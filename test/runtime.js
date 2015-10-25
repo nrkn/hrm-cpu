@@ -1,8 +1,28 @@
 const assert = require( 'assert' )
 const hrm = require( '../hrm' )
 
-const floor = {
-  1: 0
+const level = {
+  number: 1,
+  name: 'Runtime Tests',
+  instructions: 'Fail.',
+  commands: [ 'OUTBOX', 'COPYFROM', 'COPYTO', 'ADD', 'SUB', 'BUMPUP', 'BUMPDOWN', 'JUMP', 'JUMPN', 'JUMPZ' ],
+  expect: [
+    {
+      inbox: [ 1 ],
+      outbox: []
+    }
+  ],
+  floor: {
+    tiles: {
+      1: 0
+    },
+    columns: 1,
+    rows: 2
+  },
+  challenge: {
+    size: 1,
+    speed: 1
+  }
 }
 
 const fails = {
@@ -42,7 +62,20 @@ a:
   "JUMPN: Empty Hands": `
 a:  
     JUMPN a
-  `  
+  `,
+  "Out Of Bounds": `
+    COPYFROM 2
+  `,
+  "Instruction Not Allowed": `
+    INBOX
+  `,
+  "Dereferencing Not Allowed": `
+    COPYFROM [0]
+  `,
+  "Too Many Steps": `
+a:
+    JUMP A
+  `
 }
 
 describe( 'hrm-cpu runtime errors', () =>

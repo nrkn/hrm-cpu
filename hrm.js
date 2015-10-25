@@ -1,4 +1,5 @@
-const compile = require( './compile' )
+const normalizeOptions = require( './normalize-options' )
+const parse = require( './parse' )
 const runtimeErrors = require( './runtime-errors' )
 
 const asNumber = s =>
@@ -10,7 +11,7 @@ const add = ( a, b ) =>
 const sub = ( a, b ) =>
   asNumber( a ) - asNumber( b )
 
-module.exports = ( source, inbox, floor, verbose ) => {
+module.exports = ( source, inbox, options, verbose ) => {
   const input = inbox.slice()
   const output = []
   const memory = []
@@ -19,13 +20,17 @@ module.exports = ( source, inbox, floor, verbose ) => {
   var counter = 0
   var steps = 0
   
-  if( floor ){
-    const tiles = floor.tiles || floor
-    
-    Object.keys( tiles ).forEach( key =>
-      memory[ key ] = tiles[ key ]
-    )
-  }
+  //ugh implement destructuring already!
+  const opts = normalizeOptions( options )  
+  const commands = opts.commands
+  const dereferencing = opts.dereferencing  
+  const memorySize = opts.memorySize
+  const tiles = opts.tiles
+  const maxSteps = opts.maxSteps
+  
+  Object.keys( tiles ).forEach( key =>
+    memory[ key ] = tiles[ key ]
+  )
   
   const cpu = {
     INBOX: () => {
@@ -107,16 +112,28 @@ module.exports = ( source, inbox, floor, verbose ) => {
     const line = program[ i ]
     const instr = line[ 0 ]
     var arg = null
+    var dereferenced = false
     
     if( line.length > 1 ){
       var arg = line[ 1 ]  
       
       if( ( String( arg ) ).startsWith( '[' ) ){
         arg = memory[ parseInt( arg.substr( 1 ) ) ]
+        dereferenced = true
       }
     }
     
-    runtimeErrors( instr, arg, { accumulator, memory } )
+    const state = { 
+      accumulator, 
+      memory, 
+      memorySize,
+      dereferenced,
+      dereferencing, 
+      steps, 
+      maxSteps 
+    }
+    
+    runtimeErrors( instr, arg, state )
     cpu[ instr ]( arg )
     
     steps++
@@ -124,7 +141,7 @@ module.exports = ( source, inbox, floor, verbose ) => {
     return execute( program, counter )
   }
   
-  const program = compile( source )
+  const program = parse( source )
   
   const result = execute( program, 0 )    
   
