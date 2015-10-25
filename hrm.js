@@ -1,4 +1,5 @@
 const compile = require( './compile' )
+const runtimeErrors = require( './runtime-errors' )
 
 const asNumber = s =>
   typeof s === 'string' ? s.charCodeAt( 0 ) : s
@@ -10,7 +11,8 @@ const sub = ( a, b ) =>
   asNumber( a ) - asNumber( b )
 
 module.exports = ( source, inbox, floor, verbose ) => {
-  const outbox = []
+  const input = inbox.slice()
+  const output = []
   const memory = []
   
   var accumulator = null
@@ -19,6 +21,7 @@ module.exports = ( source, inbox, floor, verbose ) => {
   
   if( floor ){
     const tiles = floor.tiles || floor
+    
     Object.keys( tiles ).forEach( key =>
       memory[ key ] = tiles[ key ]
     )
@@ -26,20 +29,20 @@ module.exports = ( source, inbox, floor, verbose ) => {
   
   const cpu = {
     INBOX: () => {
-      if( inbox.length === 0 ){
+      if( input.length === 0 ){
         counter = Infinity        
         steps--
         
         return
       }
       
-      accumulator = inbox.shift()
+      accumulator = input.shift()
       
       counter++
     },
     
     OUTBOX: () => {
-      outbox.push( accumulator )
+      output.push( accumulator )
       
       accumulator = null
       
@@ -98,22 +101,23 @@ module.exports = ( source, inbox, floor, verbose ) => {
   
   const execute = ( program, i ) => {
     if( i >= program.length ){
-      return outbox
+      return output
     }
     
-    const instr = program[ i ]
+    const line = program[ i ]
+    const instr = line[ 0 ]
+    var arg = null
     
-    if( instr.length > 1 ){
-      var arg = instr[ 1 ]  
+    if( line.length > 1 ){
+      var arg = line[ 1 ]  
       
       if( ( String( arg ) ).startsWith( '[' ) ){
         arg = memory[ parseInt( arg.substr( 1 ) ) ]
       }
-      
-      cpu[ instr[ 0 ] ]( arg )
-    } else {
-      cpu[ instr[ 0 ] ]()
     }
+    
+    runtimeErrors( instr, arg, { accumulator, memory } )
+    cpu[ instr ]( arg )
     
     steps++
     

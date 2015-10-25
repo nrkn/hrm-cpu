@@ -36,7 +36,7 @@ const testLevel = ( level, source ) => {
   )
 }
 
-describe( 'hrm-cpu', () =>
+describe( 'hrm-cpu levels', () =>
   levels
     .filter( level => sources[ level.number ] !== null )
     .forEach( level => testLevel( level, sources[ level.number ] ) )     
