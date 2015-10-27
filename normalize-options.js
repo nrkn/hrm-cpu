@@ -28,7 +28,7 @@ module.exports = options => {
   
   if( options ){
     if( !options.tiles ){
-      options = Object.assign( {}, { tiles: options } )
+      options = { tiles: options }
     }
     
     return Object.assign( {}, defaults, options )

@@ -63,7 +63,7 @@ a:
 a:  
     JUMPN a
   `,
-  "Out Of Bounds": `
+  "Bad Tile Address": `
     COPYFROM 2
   `,
   "Instruction Not Allowed": `

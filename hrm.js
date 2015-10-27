@@ -1,5 +1,5 @@
+const parse = require( 'hrm-parser' )
 const normalizeOptions = require( './normalize-options' )
-const parse = require( './parse' )
 const runtimeErrors = require( './runtime-errors' )
 
 const asNumber = s =>

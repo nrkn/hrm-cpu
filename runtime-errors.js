@@ -46,10 +46,10 @@ const EmptyTileError = instrName => {
   }
 }
 
-const OutOfBoundsError = instrName => {
+const BadTileAddressError = address => {
   return {
-    name: 'No Such Tile',
-    message: `No such tile! You can't ${ instrName } with a tile that isn't on the floor!`
+    name: 'Bad Tile Address',
+    message: `Bad tile address! Tile with address ${ address } does not exist! Where do you think you're going?`
   }
 }
 
@@ -88,7 +88,7 @@ module.exports = ( instr, arg, state ) => {
     },
     memory: ( name, address ) => {
       if( address >= state.memorySize )
-        throw OutOfBoundsError( name )
+        throw BadTileAddressError( address )
 
       if( state.memory[ address ] === undefined || state.memory[ address ] === null )
         throw EmptyTileError( name )
