@@ -11,7 +11,7 @@ const regex = {
 }
 
 const isTiles = obj =>
-  Array.isArray( obj ) || Object.keys( obj ).every( key => 
+  Object.keys( obj ).every( key => 
     regex.digit.test( key )
   )
 
