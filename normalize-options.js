@@ -1,6 +1,3 @@
-const tv4 = require( 'tv4' )
-const schema = require( './node_modules/hrm-level-data/hrm-level-data-schema.json' )
-
 const defaults = {
   tiles: {},
   memorySize: Infinity,
@@ -9,34 +6,32 @@ const defaults = {
   maxSteps: 5000
 }
 
+const regex = {
+  digit: /^\d+$/
+}
+
+const isTiles = obj =>
+  Array.isArray( obj ) || Object.keys( obj ).every( key => 
+    regex.digit.test( key )
+  )
+
 module.exports = options => {
-  //level
-  if( tv4.validate( [ options ], schema ) ){
-    const commands = options.commands
-    const dereferencing = !!options.dereferencing
-    const maxSteps = options.maxSteps || defaults.maxSteps
-    var memorySize = defaults.memorySize
-    var tiles = defaults.tiles
+  //nothing
+  if( !options )
+    return defaults
     
-    if( options.floor ){
-      memorySize = options.floor.columns * options.floor.rows
-      tiles = options.floor.tiles || tiles      
-    }
-    
-    return { commands, dereferencing, memorySize, tiles, maxSteps }
-  } 
-  
-  if( options ){
-    if( !options.tiles ){
-      if( options.rows && options.columns ){
-        options.tiles = {}
-      } else {
-        options = { tiles: options }
-      }
-    }
-    
-    return Object.assign( {}, defaults, options )
+  //{ 0: 9 }
+  if( isTiles( options ) ){
+    return Object.assign( {}, defaults, { tiles: options } )
   }
   
-  return defaults
+  //{ columns, rows, tiles }
+  if( options.columns && options.rows ){
+    return Object.assign( {}, defaults, {
+      memorySize: options.columns * options.rows,
+      tiles: options.tiles || {}
+    })
+  }
+  
+  return Object.assign( {}, defaults, options )
 }
