@@ -28,7 +28,11 @@ module.exports = options => {
   
   if( options ){
     if( !options.tiles ){
-      options = { tiles: options }
+      if( options.rows && options.columns ){
+        options.tiles = {}
+      } else {
+        options = { tiles: options }
+      }
     }
     
     return Object.assign( {}, defaults, options )
