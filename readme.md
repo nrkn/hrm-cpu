@@ -178,9 +178,34 @@ HrmCpu( source, inbox, tiles ).run( ( err, outbox, state ) => {
 
 ### Related projects
 
-* [hrmsandbox]( https://github.com/sixlettervariables/hrmsandbox ) - has a web interface, command line bin, expression grammar and many other cool features
-* [hrm-level-data]( https://github.com/atesgoral/hrm-level-data ) - metadata for each level in the game, hrm-cpu uses this in its tests
-* [hrm-solutions]( https://github.com/atesgoral/hrm-solutions ) - solutions and size/speed hacks for each level
+#### Runtimes
+
+* [C++ assembler/runtime](https://github.com/LRFLEW/HRM-CCPU)
+* [JavaScript runtime](https://github.com/sixlettervariables/hrmsandbox)
+
+#### Parsers
+
+* [Expression Grammar](https://github.com/sixlettervariables/hrm-grammar)
+* [ES6 parser](https://github.com/nrkn/hrm-parser)
+
+#### Comment/label decoders & encoders
+
+* [JavaScript decoder](https://github.com/nrkn/hrm-image-decoder)
+* [Java decoder](https://gist.github.com/sendow/4df27a857000deb18cf9)
+* [Java encoder](https://gist.github.com/sendow/045f01668f976691ff6b)
+
+#### Viewers
+
+* [Program Viewer, web](https://github.com/AlanDeSmet/human-resource-machine-viewer)
+
+#### Solutions
+* [Solutions and speed/size hacks, exploits etc](https://github.com/atesgoral/hrm-solutions)
+
+#### Utils/data
+
+* [Level data](https://github.com/atesgoral/hrm-level-data)
+* [Inbox Generator](https://github.com/atesgoral/hrm-level-inbox-generator)
+* [Outbox Generator](https://github.com/atesgoral/hrm-level-outbox-generator)
 
 Please let me know if you know of any others!
 
