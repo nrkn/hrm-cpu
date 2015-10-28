@@ -1,3 +1,5 @@
+require( './polyfills' )
+
 const checks = {
   OUTBOX: {
     checks: [ 'accumulator' ]
@@ -74,7 +76,30 @@ const TooManyStepsError = maxSteps => {
   }  
 }
 
+const ProgramTooLongError = maxSize => {
+  return {
+    name: 'Program Too Long',
+    message: `Program too long! The maximum program length is ${ maxSize }!`
+  }  
+}
+
+const OverflowError = ( minValue, maxValue ) => {
+  return {
+    name: 'Overflow!',
+    message: `Overflow! Each data unit is restricted to values between ${ minValue } and ${ maxValue }. That should be enough for anybody.`
+  }
+}
+
 module.exports = ( instr, arg, state ) => {
+  if( state.accumulator < state.minValue || state.accumulator > state.maxValue )
+    throw OverflowError( state.minValue, state.maxValue )
+  
+  if( state.size > state.maxSize )
+    throw ProgramTooLongError( state.maxSize )
+  
+  if( !state.commands.includes( instr ) )
+    throw InstrNotAllowedError( instr )
+  
   if( state.dereferenced && !state.dereferencing )
     throw DereferencingNotAllowedError()
   

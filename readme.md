@@ -1,7 +1,8 @@
 # hrm-cpu
 ## Run Human Resource Machine programs in JavaScript
 
-This is a JavaScript runtime for the programs you write in the game [Human Resource Machine](http://tomorrowcorporation.com/humanresourcemachine)
+This is a JavaScript runtime for the programs you write in the game 
+[Human Resource Machine](http://tomorrowcorporation.com/humanresourcemachine)
 
 ![Screenshot](http://tomorrowcorporation.com/blog/wp-content/themes/tcTheme2/images/hrm/screenshots/hrm_04.png)
 
@@ -15,8 +16,10 @@ This is a JavaScript runtime for the programs you write in the game [Human Resou
 
 Requires node 4.x - uses ES6
 
+#### Basic Usage
+
 ```javascript
-const hrm = require( 'hrm-cpu' )
+const HrmCpu = require( 'hrm-cpu' )
 
 //source is a string in the Human Resource Machine program format
 const source = loadSomeSourceFile()
@@ -25,52 +28,184 @@ const source = loadSomeSourceFile()
 const inbox = [ 5, 18 ]
 
 //initial memory state - set just slot 9 to 0
-const floor = {
+const tiles = {
   9: 0
 }
 
-const outbox = hrm( source, inbox, floor )
+const outbox = HrmCpu( source, inbox, tiles ).run()
 
 console.log( outbox )
 
 ```
 
+Some levels don't require any floor tiles, in which case you can do:
+
+```javascript
+const outbox = HrmCpu( source, inbox ).run()
+```
+
+Some levels don't require an inbox, but if this is the case they must have floor 
+tiles:
+
+```javascript
+const outbox = HrmCpu( source, [], tiles ).run()
+```
+
+#### Advanced Usage
+
 Also see examples directory or try running the tests with mocha
 
-If you have no initial floor state (like the early levels) you can omit floor:
+##### Factory overloads
 
 ```javascript
-const outbox = hrm( source, inbox )
+HrmCpu( state ) 
+HrmCpu( options )
+HrmCpu( source, inbox )
+HrmCpu( source, options )
+HrmCpu( source, inbox, tiles )
+HrmCpu( source, inbox, floor )
 ```
 
-You can also get verbose output (for checking your size and steps):
+HrmCpu is a factory function that returns an object with some properties and 
+the functions `run` and `step`
 
 ```javascript
-const info = hrm( source, inbox, floor, true )
-```
-
-If you want verbose output but have no floor, pass an empty array or object:
-
-```javascript
-const info = hrm( source, inbox, {}, true )
-```
-
-There is also an alternative floor syntax to allow the use of data from 
-[hrm-level-data](https://github.com/atesgoral/hrm-level-data/blob/master/hrm-level-data-schema.json):
-
-```javascript
-const floor = {
-  tiles: {
-    9: 0
-  }
+{
+  options: {...},
+  state: {...},
+  run: ( cb ) => ...,
+  step: ( cb ) => ...
 }
+```
+
+Regardless of which overloads you choose, the factory requires a source file, and 
+either of, or both of, inbox and floor state
+
+If `run` is called synchronously it runs the whole program and returns the outbox
+
+If `step` is called synchronously it executes a single line of the program, and 
+returns the program state
+
+If `run` is called asynchronously it runs the whole program and then calls the 
+callback with `( err, outbox, state )`
+
+If `step` is called asynchronously it executes a single line and calls with
+`( err, state )`
+
+##### State
+
+The state object when set to the initial defaults looks like:
+
+```javascript
+{
+  program: [], 
+  accumulator: null,
+  inbox: [],
+  outbox: [],
+  memory: [],
+  counter: 0,  
+  steps: 0,
+  running: false
+}
+```
+
+##### Options
+
+Passed in options extend the default options, which are:
+
+```
+{
+  source: '',
+  inbox: [],
+  tiles: [],
+  columns: Infinity,
+  rows: Infinity,
+  commands: [ 'INBOX', 'OUTBOX', 'COPYFROM', 'COPYTO', 'ADD', 'SUB', 'BUMPUP', 'BUMPDN', 'JUMP', 'JUMPZ', 'JUMPN' ],
+  dereferencing: true,
+  maxSteps: 5000,
+  maxSize: 255,
+  minValue: -999,
+  maxValue: 999  
+}
+```
+
+These match the constraints of the actual game
+
+`source`, `inbox` and `tiles` are described above
+
+`columns` and `rows` describe the floor layout - these determine the valid floor 
+addresses and if set and your program tries to access a tile outside of these,
+an error will be thrown or sent to your callback, depending on whether you used
+the sync or async call
+
+`commands` are the commands allowed for the current program - for example, in 
+the early levels many commands are not yet available
+
+`dereferencing` is whether or not the program can access memory indirectly eg `[12]`
+
+`maxSteps` is the maximum number of steps your program can run
+
+`maxSize` is the maximum length of a program, not counting labels and comments. 
+A jump only counts as one line
+
+`minValue` is the minimum value that you can hold in your hand
+
+`maxValue` is the maximum value that you can hold in your hand
+
+##### Async example
+
+```javascript
+HrmCpu( source, inbox, tiles ).run( ( err, outbox ) => {
+  if( err ){
+    console.error( err )
+  } else {
+    console.log( outbox )
+  }
+})
+```
+
+##### Get program state from run
+
+```javascript
+HrmCpu( source, inbox, tiles ).run( ( err, outbox, state ) => {
+  if( err ){
+    console.error( err )
+  } else {
+    console.log( state )
+  }
+})
 ```
 
 ### Related projects
 
-* [hrmsandbox]( https://github.com/sixlettervariables/hrmsandbox ) - has a web interface, command line bin, expression grammar and many other cool features
-* [hrm-level-data]( https://github.com/atesgoral/hrm-level-data ) - metadata for each level in the game, hrm-cpu uses this in its tests
-* [hrm-solutions]( https://github.com/atesgoral/hrm-solutions ) - solutions and size/speed hacks for each level
+#### Runtimes
+
+* [C++ assembler/runtime](https://github.com/LRFLEW/HRM-CCPU)
+* [JavaScript runtime](https://github.com/sixlettervariables/hrmsandbox)
+
+#### Parsers
+
+* [Expression Grammar](https://github.com/sixlettervariables/hrm-grammar)
+* [ES6 parser](https://github.com/nrkn/hrm-parser)
+
+#### Comment/label decoders & encoders
+
+* [JavaScript decoder](https://github.com/nrkn/hrm-image-decoder)
+* [Java decoder](https://gist.github.com/sendow/4df27a857000deb18cf9)
+* [Java encoder](https://gist.github.com/sendow/045f01668f976691ff6b)
+
+#### Viewers
+
+* [Program Viewer, web](https://github.com/AlanDeSmet/human-resource-machine-viewer)
+
+#### Solutions
+* [Solutions and speed/size hacks, exploits etc](https://github.com/atesgoral/hrm-solutions)
+
+#### Utils/data
+
+* [Level data](https://github.com/atesgoral/hrm-level-data)
+* [Inbox Generator](https://github.com/atesgoral/hrm-level-inbox-generator)
+* [Outbox Generator](https://github.com/atesgoral/hrm-level-outbox-generator)
 
 Please let me know if you know of any others!
 

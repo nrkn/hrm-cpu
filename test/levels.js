@@ -2,7 +2,7 @@ const assert = require( 'assert' )
 const fs = require( 'fs' )
 const path = require( 'path' )
 const levels = require( 'hrm-level-data' )
-const hrm = require( '../hrm' )
+const HrmCpu = require( '../hrm-cpu' )
 
 //cannot get my head around mocha's order execution, hence sync
 const levelAsm = level => {
@@ -26,7 +26,9 @@ const testLevel = ( level, source ) => {
   describe( level.number + ' - ' + level.name, () =>
     level.expect.forEach( ( test, i ) => {
       it( 'produces the correct output for test #' + ( i + 1 ), done => {
-        const outbox = hrm( source, test.inbox, level.floor )
+        const hrm = HrmCpu( source, test.inbox, level.floor || {} )
+        
+        const outbox = hrm.run()
         
         assert.deepEqual( test.outbox, outbox )
         
