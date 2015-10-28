@@ -1,29 +1,5 @@
 const assert = require( 'assert' )
-const hrm = require( '../hrm' )
-
-const level = {
-  number: 1,
-  name: 'Runtime Tests',
-  instructions: 'Fail.',
-  commands: [ 'OUTBOX', 'COPYFROM', 'COPYTO', 'ADD', 'SUB', 'BUMPUP', 'BUMPDOWN', 'JUMP', 'JUMPN', 'JUMPZ' ],
-  expect: [
-    {
-      inbox: [ 1 ],
-      outbox: []
-    }
-  ],
-  floor: {
-    tiles: {
-      1: 0
-    },
-    columns: 1,
-    rows: 2
-  },
-  challenge: {
-    size: 1,
-    speed: 1
-  }
-}
+const HrmCpu = require( '../hrm-cpu' )
 
 const fails = {
   "OUTBOX: Empty Hands": `
@@ -74,8 +50,34 @@ a:
   `,
   "Too Many Steps": `
 a:
-    JUMP A
+    JUMP a
+  `,
+  "Overflow": `
+    BUMPUP 1
+a:
+    COPYFROM 1
+    ADD 1
+    COPYTO 1
+    JUMP a
   `
+}
+
+var tooLong = ''
+for( var i = 0; i < 256; i++ ){
+  tooLong += ' COPYFROM 1'
+}
+
+fails[ 'Program Too Long' ] = tooLong
+
+const Options = () => {
+  return {
+    commands: [ 'OUTBOX', 'COPYFROM', 'COPYTO', 'ADD', 'SUB', 'BUMPUP', 'BUMPDOWN', 'JUMP', 'JUMPN', 'JUMPZ' ],
+    tiles: {
+      1: 0
+    },
+    columns: 1,
+    rows: 2
+  }
 }
 
 describe( 'hrm-cpu runtime errors', () =>
@@ -83,7 +85,15 @@ describe( 'hrm-cpu runtime errors', () =>
     const source = fails[ key ]
 
     it( key, done => {
-      assert.throws( () => hrm( source, [ 1 ], floor ) )
+      const inbox = [ 1 ]
+      const options = Object.assign( Options(), { source, inbox } )
+      
+      const hrm = HrmCpu( options )
+      
+      assert.throws( () => {
+        hrm.run()
+      })
+      
       done()
     })    
   })
