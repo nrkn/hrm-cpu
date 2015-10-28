@@ -92,31 +92,9 @@ callback with `( err, outbox, state )`
 If `step` is called asynchronously it executes a single line and calls with
 `( err, state )`
 
-##### Async example
+##### State
 
-```javascript
-HrmCpu( source, inbox, tiles ).run( ( err, outbox ) => {
-  if( err ){
-    console.error( err )
-  } else {
-    console.log( outbox )
-  }
-})
-```
-
-##### Get program state from run
-
-```javascript
-HrmCpu( source, inbox, tiles ).run( ( err, outbox, state ) => {
-  if( err ){
-    console.error( err )
-  } else {
-    console.log( state )
-  }
-})
-```
-
-Produces an object like the following, but populated with the appropriate data:
+The state object when set to the initial defaults looks like:
 
 ```javascript
 {
@@ -173,6 +151,30 @@ A jump only counts as one line
 `minValue` is the minimum value that you can hold in your hand
 
 `maxValue` is the maximum value that you can hold in your hand
+
+##### Async example
+
+```javascript
+HrmCpu( source, inbox, tiles ).run( ( err, outbox ) => {
+  if( err ){
+    console.error( err )
+  } else {
+    console.log( outbox )
+  }
+})
+```
+
+##### Get program state from run
+
+```javascript
+HrmCpu( source, inbox, tiles ).run( ( err, outbox, state ) => {
+  if( err ){
+    console.error( err )
+  } else {
+    console.log( state )
+  }
+})
+```
 
 ### Related projects
 
