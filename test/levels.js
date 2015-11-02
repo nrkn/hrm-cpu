@@ -24,7 +24,7 @@ levels.forEach( level =>
 
 const testLevel = ( level, source ) => {  
   describe( level.number + ' - ' + level.name, () =>
-    level.expect.forEach( ( test, i ) => {
+    level.examples.forEach( ( test, i ) => {
       it( 'produces the correct output for test #' + ( i + 1 ), done => {
         const hrm = HrmCpu( source, test.inbox, level.floor || {} )
         
