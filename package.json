@@ -35,6 +35,11 @@
     "test": "mocha"
   },
   "dependencies": {
-    "hrm-parser": "^0.1.4"
+    "hrm-parser": "^0.1.5"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
   }
 }
