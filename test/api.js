@@ -8,7 +8,7 @@ const fixtures = {
     outbox: [ 1 ]
   },
   tiles: {
-    source: 'INBOX ADD 0 OUTBOX',
+    source: 'inbox add 0 outbox',
     tiles: { 0: 2 },
     inbox: [ 1 ],
     outbox: [ 3 ]
